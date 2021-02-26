@@ -7,6 +7,8 @@ public class ThreadStop {
                     int count = 0;
                     while (!Thread.currentThread().isInterrupted()) {
                         System.out.println(count++);
+                        System.out.println(Thread.currentThread().getName());
+                        System.out.println(Thread.currentThread().getState());
                     }
                 }
         );
