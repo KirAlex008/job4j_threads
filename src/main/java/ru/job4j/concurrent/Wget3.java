@@ -28,6 +28,7 @@ public class Wget3 implements Runnable {
             long firstPoint = System.currentTimeMillis();
             long secondPoint = 0;
             int counter = 0;
+            int speedRatio = speed / 1024;
             while ((bytesRead = in.read(dataBuffer, 0, 1024)) != -1) {
                 fileOutputStream.write(dataBuffer, 0, bytesRead);
                 counter++;
@@ -35,8 +36,8 @@ public class Wget3 implements Runnable {
                     secondPoint = System.currentTimeMillis();
                 }
                 long timeFor1024 = secondPoint - firstPoint;
-                System.out.println(timeFor1024 + " timeFor1024");
-                Thread.sleep(1000 - timeFor1024);
+                //System.out.println(timeFor1024 + " timeFor1024");
+                Thread.sleep(1000 - speedRatio * timeFor1024);
             }
         } catch (IOException | InterruptedException e) {
             Thread.currentThread().interrupt();
@@ -44,18 +45,12 @@ public class Wget3 implements Runnable {
     }
 
     public static void main(String[] args) throws InterruptedException {
-        long start = System.currentTimeMillis();
         //String url = args[0];
         String url = "pom_tmp.xml";
-        File file = new File(url);
-        long size = file.length();
-        System.out.println("length = " + size);
         //int speed = Integer.parseInt(args[1]);
         int speed = 1024;
         Thread wget = new Thread(new Wget3(url, speed));
         wget.start();
         wget.join();
-        long stop = System.currentTimeMillis();
-        System.out.println(stop - start + " Working time");
     }
 }
