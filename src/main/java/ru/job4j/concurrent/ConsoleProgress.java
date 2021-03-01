@@ -7,18 +7,22 @@ public class ConsoleProgress implements Runnable{
         int index = 0;
         while (!Thread.currentThread().isInterrupted()) {
             try {
-                    System.out.print("\r load: " + "\\");
+                while (index < 6) {
+                    marking();
+                    index++;
+                }
+                System.out.print("\rLoaded.");
+                Thread.currentThread().interrupt();
+
+                    /*System.out.print("\r load: " + "\\");
                     //System.out.print("\rLoading : " + index  + "%");
                     Thread.sleep(500);
                     System.out.print("\r load: " + "|");
                     Thread.sleep(500);
                     System.out.print("\r load: " + "/");
-                    Thread.sleep(500);
-                index++;
-                if (index == 5) {
-                    System.out.print("\rLoaded.");
-                   Thread.currentThread().interrupt();
-               }
+                    Thread.sleep(500);*/
+
+
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
             }
@@ -34,5 +38,16 @@ public class ConsoleProgress implements Runnable{
             Thread.currentThread().interrupt();
         }
         progress.interrupt();
+    }
+
+    public void marking() throws InterruptedException {
+        String[] sings = new String[3];
+        sings[0] = "\\";
+        sings[1] = "|";
+        sings[2] = "/";
+        for (int i = 0; i <=2; i++) {
+            System.out.println("\r load: " + sings[i]);
+            Thread.sleep(500);
+        }
     }
 }
