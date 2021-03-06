@@ -1,11 +1,9 @@
 package ru.job4j.concurrent;
 
 import java.io.BufferedInputStream;
-import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
-import java.nio.file.Path;
 
 public class Wget3 implements Runnable {
     private final String url;
@@ -18,9 +16,7 @@ public class Wget3 implements Runnable {
 
     @Override
     public void run() {
-        /* Скачать файл */
-        /* Скорость 1 КБайт в 1 секунду */
-        String file = "https://raw.githubusercontent.com/peterarsentev/course_test/master/pom.xml";
+        String file = url;
         try (BufferedInputStream in = new BufferedInputStream(new URL(file).openStream());
              FileOutputStream fileOutputStream = new FileOutputStream("pom_tmp.xml")) {
             byte[] dataBuffer = new byte[1024];
@@ -36,7 +32,6 @@ public class Wget3 implements Runnable {
                     secondPoint = System.currentTimeMillis();
                 }
                 long timeFor1024 = secondPoint - firstPoint;
-                //System.out.println(timeFor1024 + " timeFor1024");
                 Thread.sleep(1000 - speedRatio * timeFor1024);
             }
         } catch (IOException | InterruptedException e) {
@@ -45,10 +40,8 @@ public class Wget3 implements Runnable {
     }
 
     public static void main(String[] args) throws InterruptedException {
-        //String url = args[0];
-        String url = "pom_tmp.xml";
-        //int speed = Integer.parseInt(args[1]);
-        int speed = 1024;
+        String url = args[0];
+        int speed = Integer.parseInt(args[1]);
         Thread wget = new Thread(new Wget3(url, speed));
         wget.start();
         wget.join();
