@@ -24,5 +24,6 @@ public class ShareNotSafe {
         for (var el: newList) {
             System.out.println(el.getName());
         }
+        //System.out.println(cache.findById(1).getName() + " " + cache.findById(1).getId());
     }
 }
