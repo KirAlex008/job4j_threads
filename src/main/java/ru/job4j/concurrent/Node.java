@@ -1,5 +1,8 @@
 package ru.job4j.concurrent;
 
+import net.jcip.annotations.Immutable;
+
+@Immutable
 public class Node<T> {
     private final Node<T> next;
     private final T value;
