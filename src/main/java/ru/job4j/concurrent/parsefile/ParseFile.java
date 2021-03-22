@@ -1,8 +1,8 @@
-package ru.job4j.concurrent;
+package ru.job4j.concurrent.parsefile;
 
 import java.io.*;
 
-public class ParseFile {
+public class ParseFile implements Input, Output {
     private volatile File file;
 
     public synchronized void setFile(File f) {
