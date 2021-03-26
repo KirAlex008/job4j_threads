@@ -13,45 +13,39 @@ public class UserStorage {
 
     public synchronized boolean add(User user) {
         boolean flag = false;
-        Integer key = user.getId();
-        if (!storage.containsKey(key)) {
+        User rsl = storage.putIfAbsent(user.getId(), user);
+        if (rsl == null) {
             flag = true;
-            storage.put(key, user);
         }
         return flag;
     }
 
     public synchronized boolean update(User user) {
         boolean flag = false;
-        Integer key = user.getId();
-        if (storage.containsKey(key)) {
+        User rsl = storage.replace(user.getId(), user);
+        if (rsl == null) {
             flag = true;
-            storage.put(key, user);
         }
         return flag;
     }
 
     public synchronized boolean delete(User user) {
         boolean flag = false;
-        Integer key = user.getId();
-        if (storage.containsKey(key)) {
-            flag = true;
-            storage.remove(key);
-        }
+        flag = storage.remove(user.getId(), user);
         return flag;
     }
 
     public synchronized boolean transfer(int fromId, int toId, int amount) {
-        User first = storage.get(fromId);
-        User second =storage.get(toId);
         boolean flag = false;
-        if (first.getAmount() - amount >= 0) {
+        User first = storage.get(fromId);
+        User second = storage.get(toId);
+        if (first != null && second != null && first.getAmount() - amount >= 0) {
             int minus = first.getAmount() - amount;
             int plus = second.getAmount() + amount;
             first.setAmount(minus);
             second.setAmount(plus);
-            this.update(first);
-            this.update(second);
+            update(first);
+            update(second);
             flag = true;
         }
         return flag;
