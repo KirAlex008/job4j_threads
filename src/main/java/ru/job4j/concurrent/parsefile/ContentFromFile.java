@@ -15,7 +15,7 @@ public class ContentFromFile implements Input {
     }
 
     @Override
-    public synchronized String content() {
+    public String content() {
         StringBuilder output = new StringBuilder();
         try (BufferedReader in = new BufferedReader(new FileReader(file))) {
             int data;

@@ -12,7 +12,7 @@ public class SaveToFile implements Output {
         this.file = file;
     }
     @Override
-    public synchronized void saveContent(String content) {
+    public void saveContent(String content) {
         try (PrintWriter out = new PrintWriter(new BufferedOutputStream(new FileOutputStream(file)))) {
             out.write(content);
         } catch (Exception e) {
