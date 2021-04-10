@@ -33,6 +33,7 @@ public class SimpleBlockingQueueTest {
 
     @Test
     public void whenFetchAllThenGetIt() throws InterruptedException {
+
         //Integer array[] = new Integer[5];
         final CopyOnWriteArrayList<Integer> buffer = new CopyOnWriteArrayList<Integer>();
         final SimpleBlockingQueue<Integer> queue = new SimpleBlockingQueue<>(5);
