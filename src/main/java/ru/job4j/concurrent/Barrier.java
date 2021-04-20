@@ -1,6 +1,7 @@
 package ru.job4j.concurrent;
 
 public class Barrier {
+
     private boolean flag = false;
 
     private final Object monitor = this;
@@ -30,4 +31,5 @@ public class Barrier {
             }
         }
     }
+
 }
