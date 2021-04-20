@@ -18,7 +18,7 @@ public class FindMin extends RecursiveTask<Integer> {
     protected Integer compute() {
         int sliceLength = (endIndex - startIndex) + 1;
         if (sliceLength > 2) {
-            FindMin lowerFindMin = new FindMin(numbers, startIndex, startIndex+ (sliceLength / 2) - 1);
+            FindMin lowerFindMin = new FindMin(numbers, startIndex, startIndex + (sliceLength / 2) - 1);
             lowerFindMin.fork();
             FindMin upperFindMin = new FindMin(numbers, startIndex + (sliceLength / 2), endIndex);
             upperFindMin.fork();
@@ -34,7 +34,7 @@ public class FindMin extends RecursiveTask<Integer> {
             numbers[i] = random.nextInt(100);
         }
 
-        ForkJoinPool pool = new ForkJoinPool(Runtime.getRuntime(). availableProcessors());
+        ForkJoinPool pool = new ForkJoinPool(Runtime.getRuntime().availableProcessors());
         Integer min = pool.invoke(new FindMin(numbers, 0, numbers.length - 1));
         System.out.println(min);
     }

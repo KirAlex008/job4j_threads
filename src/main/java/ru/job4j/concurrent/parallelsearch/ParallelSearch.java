@@ -54,7 +54,8 @@ public class ParallelSearch {
         }
         numbers[98] = 10;
 
-        ForkJoinPool pool = new ForkJoinPool(Runtime.getRuntime(). availableProcessors());
+        ForkJoinPool pool;
+        pool = new ForkJoinPool(Runtime.getRuntime().availableProcessors());
         pool.invoke(new SearchTask<>(0, numbers.length - 1, numbers, 10));
         System.out.println(pool.invoke(new SearchTask<>(0, numbers.length - 1, numbers, 10)));
     }

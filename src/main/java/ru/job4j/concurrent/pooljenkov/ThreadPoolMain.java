@@ -1,4 +1,4 @@
-package ru.job4j.concurrent.poolJenkov;
+package ru.job4j.concurrent.pooljenkov;
 
 public class ThreadPoolMain {
 
@@ -6,13 +6,13 @@ public class ThreadPoolMain {
 
         ThreadPool threadPool = new ThreadPool(3, 10);
 
-        for(int i=0; i<10; i++) {
+        for (int i = 0; i < 10; i++) {
 
             int taskNo = i;
-            threadPool.execute( () -> {
+            threadPool.execute(() -> {
                 String message =
                         Thread.currentThread().getName()
-                                + ": Task " + taskNo ;
+                                + ": Task " + taskNo;
                 System.out.println(message);
             });
         }

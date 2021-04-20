@@ -1,4 +1,4 @@
-package ru.job4j.concurrent.poolJenkov;
+package ru.job4j.concurrent.pooljenkov;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,36 +11,36 @@ public class ThreadPool {
     private List<PoolThreadRunnable> runnables = new ArrayList<>();
     private boolean isStopped = false;
 
-    public ThreadPool(int noOfThreads, int maxNoOfTasks){
+    public ThreadPool(int noOfThreads, int maxNoOfTasks) {
         taskQueue = new ArrayBlockingQueue(maxNoOfTasks);
 
-        for(int i=0; i<noOfThreads; i++){
+        for (int i = 0; i < noOfThreads; i++) {
             PoolThreadRunnable poolThreadRunnable =
                     new PoolThreadRunnable(taskQueue);
 
             runnables.add(new PoolThreadRunnable(taskQueue));
         }
-        for(PoolThreadRunnable runnable : runnables){
+        for (PoolThreadRunnable runnable : runnables) {
             new Thread(runnable).start();
         }
     }
 
-    public synchronized void  execute(Runnable task) throws Exception{
-        if(this.isStopped) throw
-                new IllegalStateException("ThreadPool is stopped");
-
+    public synchronized void  execute(Runnable task) throws Exception {
+        if (this.isStopped) {
+            throw new IllegalStateException("ThreadPool is stopped");
+        }
         this.taskQueue.offer(task);
     }
 
-    public synchronized void stop(){
+    public synchronized void stop() {
         this.isStopped = true;
-        for(PoolThreadRunnable runnable : runnables){
+        for (PoolThreadRunnable runnable : runnables) {
             runnable.doStop();
         }
     }
 
     public synchronized void waitUntilAllTasksFinished() {
-        while(this.taskQueue.size() > 0) {
+        while (this.taskQueue.size() > 0) {
             try {
                 Thread.sleep(1);
             } catch (InterruptedException e) {

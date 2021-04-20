@@ -6,13 +6,13 @@ public class ThreadPoolMain {
 
         ThreadPool threadPool = new ThreadPool(10);
 
-        for(int i=0; i<10; i++) {
+        for (int i = 0; i < 10; i++) {
 
             int taskNo = i;
-            threadPool.work( () -> {
+            threadPool.work(() -> {
                 String message =
                         Thread.currentThread().getName()
-                                + ": Task " + taskNo ;
+                                + ": Task " + taskNo;
                 System.out.println(message);
             });
         }

@@ -1,6 +1,6 @@
 package ru.job4j.concurrent;
 
-public class ConsoleProgress implements Runnable{
+public class ConsoleProgress implements Runnable {
 
     @Override
     public void run() {
@@ -45,7 +45,7 @@ public class ConsoleProgress implements Runnable{
         sings[0] = "\\";
         sings[1] = "|";
         sings[2] = "/";
-        for (int i = 0; i <=2; i++) {
+        for (int i = 0; i <= 2; i++) {
             System.out.println("\r load: " + sings[i]);
             Thread.sleep(500);
         }

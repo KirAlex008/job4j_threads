@@ -10,7 +10,9 @@ public class MergeSort {
         // при следующем условии, массив из одного элемента
         // делить нечего, возвращаем элемент
         if (from == to) {
-            return new int[] { array[from] };
+            return new int[] {
+                    array[from]
+            };
         }
         // попали сюда, значит в массиве более одного элемента
         // находим середину
@@ -47,8 +49,9 @@ public class MergeSort {
     public static int linearSearch(int[] array, int elementToSearch) {
 
         for (int index = 0; index < array.length; index++) {
-            if (array[index] == elementToSearch)
+            if (array[index] == elementToSearch) {
                 return index;
+            }
         }
         return -1;
     }
