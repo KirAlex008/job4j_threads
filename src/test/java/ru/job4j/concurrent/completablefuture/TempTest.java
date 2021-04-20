@@ -10,7 +10,7 @@ import static ru.job4j.concurrent.completablefuture.Temp.Sums;
 import static org.junit.Assert.*;
 
 public class TempTest {
-    int[][] matrix = new int[4][3];
+ /*   int[][] matrix = new int[4][3];
 
     @Before
     public void init() {
@@ -43,6 +43,6 @@ public class TempTest {
         assertThat(sums[1].getColSum(), is(15));
         assertThat(sums[2].getColSum(), is(18));
     }
-
+*/
 
 }
