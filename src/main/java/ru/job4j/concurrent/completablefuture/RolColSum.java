@@ -8,8 +8,18 @@ import java.util.concurrent.ExecutionException;
 
 public class RolColSum {
     public static class Sums {
-        private int rowSum;
         private int colSum;
+        private int rowSum;
+
+        public Sums(int colSum, int rowSum) {
+            this.rowSum = rowSum;
+            this.colSum = colSum;
+        }
+
+        public Sums() {
+            this.rowSum = 0;
+            this.colSum = 0;
+        }
 
         public int getRowSum() {
             return rowSum;
@@ -26,12 +36,16 @@ public class RolColSum {
         public void setColSum(int colSum) {
             this.colSum = colSum;
         }
+
+        @Override
+        public String toString() {
+            return "Sums{" + "rowSum=" + rowSum + ", colSum=" + colSum + '}';
+        }
     }
 
     public static Sums[] sum(int[][] matrix) {
         Sums[] sums = new Sums[matrix.length];
         for (int i = 0; i < matrix.length; i++) {
-            System.out.println(i);
             sums[i] = new Sums();
         }
         int limit = matrix.length;
@@ -50,20 +64,7 @@ public class RolColSum {
         return sums;
     }
 
-    public static void main(String[] args) {
-        int[][] myArray = {{9, 7, 2}, {13, 10, 3}, {8, 4, 12}};
 
-        //var rsl = sum(myArray);
- /*       var rsl = asyncSum(myArray);
-        for (var el : rsl) {
-            el.getColSum();
-            System.out.println(el.getColSum() + "C");
-            }
-        for (var el : rsl) {
-            el.getRowSum();
-            System.out.println(el.getRowSum() + "R");
-        }*/
-    }
 
     public static Sums[] asyncSum(int[][] matrix) throws ExecutionException, InterruptedException {
         Map<Integer, CompletableFuture<Sums>> map = new HashMap<>();
